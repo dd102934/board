@@ -1,9 +1,13 @@
-<% if flash[:error_messages]  %>
-  <div class="alert alert-danger">
-    <ul>
-      <% flash[:error_messages].each do |msg|  %>
-        <li><%= msg %></li>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>">
+    <% if message.class == Array %>
+      <% message.each do |msg| %>
+        <ul>  
+          <li><%= msg %></li>
+        </ul>
       <% end %>
-    <ul>
+    <% else %>
+          <li><%= message %></li>
+    <% end %>  
   </div>
 <% end %>

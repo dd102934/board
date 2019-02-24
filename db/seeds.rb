@@ -8,7 +8,7 @@
 if Rails.env == 'development'
   
   (1..50).each do |i|
-    Board.create(name: "ユーザー#{i}", title: "タイトル#{i}", body: "本文#{i}")
+    Board.create(name: "ユーザー#{i}", title: "タイトル#{i}", body: "本文#{i}",user_id: i)
   end  
   
   User.create!(name:  "Example User",

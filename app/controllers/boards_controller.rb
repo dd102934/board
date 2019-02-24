@@ -19,7 +19,7 @@ class BoardsController < ApplicationController
       redirect_to board
     else
       flash[:board] = board
-      flash[:error_messages] = board.errors.full_messages
+      flash[:danger] = board.errors.full_messages
       redirect_back fallback_location: @board
     end
   end
@@ -65,8 +65,8 @@ class BoardsController < ApplicationController
   def logged_in_user
     unless logged_in?
       store_location
-      #flash[:danger] = "Please log in."
-      redirect_to login_url
+      flash.now[:danger] = "ログインしてください"
+      render "sessions/new" 
     end
   end
   
