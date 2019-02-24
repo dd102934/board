@@ -18,7 +18,6 @@
 
 class User < ApplicationRecord
   has_many :boards, dependent: :delete_all 
-  
   attr_accessor :remember_token
 
   validates :name,  presence: true, length: { maximum:  50 }
