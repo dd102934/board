@@ -21,7 +21,8 @@ group :development, :test do
   gem 'sqlite3',      '1.3.13'
   gem 'byebug', '9.0.6', platform: :mri
   gem 'rails-flog', require: 'flog'  
-  gem 'rspec-rails', '~> 3.6.0'
+  gem 'rspec-rails', '~> 3.8.0'
+  gem 'factory_bot_rails', "~> 4.10.0"
 end
 
 group :development do
@@ -31,6 +32,11 @@ group :development do
   gem 'spring-watcher-listen', '2.0.1'
   gem 'pry-byebug'
   gem 'spring-commands-rspec'
+end
+
+group :test do
+  gem "shoulda-matchers"
+  gem 'capybara', '~> 2.15.2'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
