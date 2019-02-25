@@ -14,6 +14,8 @@ gem 'kaminari'
 gem 'rails-i18n'
 gem 'annotate'
 gem 'bcrypt',        '3.1.12'
+gem 'carrierwave'
+gem 'rmagick',         '2.16.0'
 
 group :development, :test do
   gem 'sqlite3',      '1.3.13'

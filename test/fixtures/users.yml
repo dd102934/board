@@ -5,6 +5,7 @@
 #  id              :integer          not null, primary key
 #  admin           :boolean          default(FALSE)
 #  email           :string
+#  image           :string
 #  name            :string
 #  password_digest :string
 #  remember_digest :string

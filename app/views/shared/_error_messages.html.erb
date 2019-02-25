@@ -2,12 +2,14 @@
   <div class="alert alert-<%= message_type %>">
     <% if message.class == Array %>
       <% message.each do |msg| %>
-        <ul>  
+        <ul>
           <li><%= msg %></li>
         </ul>
       <% end %>
     <% else %>
+      <% unless message.class == Hash %>
           <li><%= message %></li>
+      <% end %>
     <% end %>  
   </div>
 <% end %>

@@ -5,9 +5,10 @@
   </div>
 </div>
 
-<% if flash[:notice] %>
-  <div class="alert alert-danger"><%= flash[:notice] %></div>
+<% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
+
 
 <table class="table table-hover boards__table">
   <thead class="thead-dark">
@@ -30,7 +31,9 @@
           <td><%= board.created_at.to_s(:datetime_jp) %></td>
           <td><%= board.updated_at.to_s(:datetime_jp) %></td>
           <td><%= link_to '詳細', board, class: 'btn btn-outline-dark' %></td>
-          <td><%= link_to '削除', board, class: 'btn btn-outline-dark', method: :delete %></td>
+         <% if current_user.admin? == true %>
+            <td><%= link_to '削除', board, class: 'btn btn-outline-dark', method: :delete %></td>
+         <% end %>  
         </tr>
     <% end %>
   </tbody>

@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :show, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy  
 
@@ -15,7 +15,7 @@ class BoardsController < ApplicationController
   def create
     board = current_user.boards.new(board_params)
     if board.save
-      flash[:notice] = "「#{board.title}」の掲示板を作成しました"
+      flash[:success] = "「#{board.title}」の掲示板を作成しました"
       redirect_to board
     else
       flash[:board] = board
@@ -39,7 +39,7 @@ class BoardsController < ApplicationController
       redirect_to @board
     else
       flash[:board] = @board
-      flash[:error_messages] = @board.errors.full_messages
+      flash[:danger] = @board.errors.full_messages
       redirect_back fallback_location: @board
     end
   end
@@ -47,7 +47,7 @@ class BoardsController < ApplicationController
   def destroy
     @board = Board.find(params[:id])
     @board.delete
-    redirect_to boards_path, flash: { notice: "「#{@board.title}」の掲示板が削除されました" }
+    redirect_to boards_path, flash: { danger: "「#{@board.title}」の掲示板が削除されました" }
   end
 
   private

@@ -5,6 +5,7 @@
 #  id              :integer          not null, primary key
 #  admin           :boolean          default(FALSE)
 #  email           :string
+#  image           :string
 #  name            :string
 #  password_digest :string
 #  remember_digest :string
@@ -19,6 +20,7 @@
 class User < ApplicationRecord
   has_many :boards, dependent: :delete_all 
   attr_accessor :remember_token
+  mount_uploader :image, ImageUploader
 
   validates :name,  presence: true, length: { maximum:  50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

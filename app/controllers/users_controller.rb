@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :show, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @boards = @user.boards
   end
 
   def new
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
       flash[:success] = "更新が完了しました"
       redirect_to @user
     else
-      flash[:error_messages] = @user.errors.full_messages
+      flash[:danger] = @user.errors.full_messages
       redirect_back(fallback_location: edit_user_path)  
     end
   end
@@ -53,7 +54,7 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(
-      :name, :email, :password, 
+      :name, :email, :image, :password, 
       :password_confirmation)
   end
   
