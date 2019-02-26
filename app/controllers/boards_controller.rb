@@ -31,12 +31,13 @@ class BoardsController < ApplicationController
 
   def edit
     @board = Board.find(params[:id])
+    @user1 = User.find(@board.user_id)
   end
 
   def update
     @board = Board.find(params[:id])
     if @board.update(board_params)
-      redirect_to @board
+       redirect_to board_path, flash: { success: "掲示板の編集が完了しました" }
     else
       flash[:board] = @board
       flash[:danger] = @board.errors.full_messages
@@ -71,7 +72,8 @@ class BoardsController < ApplicationController
   end
   
   def correct_user
-    @user = User.find(params[:id])
+    @board = Board.find(params[:id])
+    @user = User.find(@board.user_id)
     redirect_to(root_url) unless current_user?(@user)
   end
   
