@@ -4,13 +4,13 @@ RSpec.feature "Users", type: :feature do
    
    let(:user) { FactoryBot.create(:user) }
    
-   scenario "sign in a user" do
+   scenario "create a new user" do
     sign_in_as user
     expect(page).to have_content "マイページ"
     expect(page).to have_content "ログインしました"
    end
   
-   scenario "user successfully signs up" do
+   scenario "user successfully login" do
      visit root_path
      click_link "登録"
       
@@ -26,4 +26,18 @@ RSpec.feature "Users", type: :feature do
      expect(page).to have_content "ようこそ BoardAppへ！"
      expect(page).to have_content "Test_user"
    end
+   
+   scenario "user successfully logout" do
+     sign_in_as user
+     click_link "ログアウト"
+     visit boards_path
+     expect(page).to have_content "ログインしてください"
+   end 
+   
+   scenario "successfully edit_user" do
+     sign_in_as user
+     click_link "ログアウト"
+     visit boards_path
+     expect(page).to have_content "ログインしてください"
+   end 
 end
