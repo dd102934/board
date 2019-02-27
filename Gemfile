@@ -40,4 +40,8 @@ group :test do
   gem 'capybara', '~> 2.15.2'
 end
 
+group :production do
+  gem 'pg', '0.20.0'
+end
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
