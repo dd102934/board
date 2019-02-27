@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature "Boards", type: :feature do
+  let(:user) { FactoryBot.create(:user,admin: true) }
   
   scenario "user creates a new board" do
-    user = FactoryBot.create(:user)
-    
+
     sign_in_as user
     visit boards_path
 
@@ -24,7 +24,6 @@ RSpec.feature "Boards", type: :feature do
   end
   
   scenario "user delete a board" do
-    user = FactoryBot.create(:user,admin: true)
     sign_in_as user
     
     visit boards_path
