@@ -34,10 +34,26 @@ RSpec.feature "Users", type: :feature do
      expect(page).to have_content "ログインしてください"
    end 
    
-   scenario "successfully edit_user" do
+   scenario "successfully edit user" do
      sign_in_as user
-     click_link "ログアウト"
-     visit boards_path
-     expect(page).to have_content "ログインしてください"
-   end 
+     visit root_path
+     click_link "編集"
+    
+   end
+   
+   scenario "user uploads an attachment" do
+     sign_in_as user
+     visit root_path
+     click_link "編集"
+     fill_in "user[name]", with: "edit_user"
+     fill_in "user[email]", with: "edit@example.com"
+     fill_in "user[password]", with: "test123"
+     fill_in "user[password_confirmation]", with: "test123"
+     attach_file "user[image]", "#{Rails.root}/spec/file/attachment.jpg"
+     click_button "保存"
+     expect(page).to have_content "更新が完了しました"
+     expect(page).to have_content "edit_user"
+     expect(page).to have_selector 'img'
+   end
+
 end
