@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 if Rails.env == 'development'
   
-  User.create!(name:  "Example User",
+  User.create!(name:  "Test User",
              email: "example@railstutorial.org",
              password:              "foobar",
              password_confirmation: "foobar",
@@ -23,9 +23,9 @@ if Rails.env == 'development'
                 password_confirmation: password)
   end
    
-  users = User.order(:created_at).take(3)
   (1..20).each do |i|
-    users.each { |user| user.boards.create!(name: "ユーザー#{i}", title: "タイトル#{i}", body: "本文#{i}")}
-  end  
+    user = User.first
+    user.boards.create!(name: "#{user.name}", title: "タイトル#{i}", body: "本文#{i}")
+  end 
    
 end
