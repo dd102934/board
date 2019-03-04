@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-if Rails.env == 'production'
+if Rails.env == 'development'
   
   User.create!(name:  "Test User",
              email: "example@railstutorial.org",
@@ -26,6 +26,15 @@ if Rails.env == 'production'
   (1..20).each do |i|
     user = User.first
     user.boards.create!(name: "#{user.name}", title: "タイトル#{i}", body: "本文#{i}")
-  end 
+  end
+  
+  Tag.create([
+    { name: "プログラミング" },
+    { name: "エンタメ" },
+    { name: "スポーツ" },
+    { name: "雑談" },
+    { name: "趣味" },
+    { name: "相談" }
+  ])
    
 end

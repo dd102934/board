@@ -47,14 +47,14 @@ class BoardsController < ApplicationController
 
   def destroy
     @board = Board.find(params[:id])
-    @board.delete
+    @board.destory
     redirect_to boards_path, flash: { danger: "「#{@board.title}」の掲示板が削除されました" }
   end
 
   private
 
   def board_params
-    params.require(:board).permit(:name, :title, :body)
+    params.require(:board).permit(:name, :title, :body, tag_ids: [])
   end
 
   def set_target_board

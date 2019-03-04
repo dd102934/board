@@ -18,6 +18,8 @@
 class Board < ApplicationRecord
   has_many :comments, dependent: :delete_all 
   belongs_to :user
+  has_many :board_tag_relations, dependent: :delete_all 
+  has_many :tags, through: :board_tag_relations
   
   default_scope -> { order(created_at: :desc) }
 
