@@ -40,4 +40,22 @@ RSpec.feature "Boards", type: :feature do
     }.to change(user.boards, :count).by(-1)
 
   end
+  
+  #scenario "user creates a new board adding tags" do
+    #sign_in_as user
+    
+    #visit boards_path
+    
+    #click_link "新規作成"
+    #fill_in "board[title]", with: "Test Board"
+    #fill_in "board[body]", with: "Trying test"
+    #find('#board_tag_ids_1', visible: false).trigger("click")
+    #expect(page).to have_checked_field("プログラミング")
+    
+    #click_button "保存"
+    
+    #aggregate_failures do
+      #expect(page).to have_content "プログラミング"
+    #end
+  #end
 end
