@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Boards", type: :feature do
   let(:user) { FactoryBot.create(:user,admin: true) }
+  let(:board) { FactoryBot.create(:board) }
   
-  scenario "user creates a new board" do
+  scenario "A user create a new board" do
 
     sign_in_as user
     visit boards_path
@@ -20,10 +21,48 @@ RSpec.feature "Boards", type: :feature do
         expect(page).to have_content "Trying test"
       end
     }.to change(user.boards, :count).by(1)
-    
   end
   
-  scenario "user delete a board" do
+  scenario "A user fails to create a new board" do
+
+    sign_in_as user
+    visit boards_path
+
+    click_link "新規作成"
+    fill_in "board[title]", with: ""
+    fill_in "board[body]", with: ""
+    click_button "保存"
+
+    aggregate_failures do
+      expect(page).to have_content "タイトルを入力してください"
+      expect(page).to have_content "本文を入力してください"
+    end
+  end
+  
+  scenario "A user edit a board" do
+    sign_in_as user
+    visit boards_path
+
+    click_link "新規作成"
+    fill_in "board[title]", with: "Test"
+    fill_in "board[body]", with: "Trying"
+    click_button "保存"
+   
+    first('.ml-auto').click_link '編集'
+    
+    fill_in "board[title]", with: "Edit"
+    fill_in "board[body]", with: "body"
+    click_button "保存"
+    
+    aggregate_failures do
+      expect(page).to have_content "Edit"
+      expect(page).to have_content "body"
+    end
+  
+
+  end
+  
+  scenario "A user delete a board" do
     sign_in_as user
     
     visit boards_path

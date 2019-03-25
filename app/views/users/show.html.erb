@@ -1,18 +1,13 @@
 <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
-<h1>マイページ</h1>
+<h1 align="center">マイページ：<%= @user.name %></h1>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h3>
-      <% if @user.image? %>
-        <%= image_tag @user.image.thumb100.url %>
-      <% end %>
-      <%= @user.name %>
-      </h3>
-    </section>
-  </aside>
+  <div class="col-md-12 col-md-offset-4 center img-circle image">
+  　<% if @user.image? %>
+    　<%= image_tag @user.image.thumb200.url, class: "img-thumbnail" %>
+    <% end %>
+  </div>
 </div>
 <table class="table table-hover boards__table">
   <thead class="thead-dark">
@@ -28,17 +23,17 @@
   </thead>
   <tbody>
     <% @boards.each do |board| %>
-        <tr>
-          <td><%= board.id %></td>
-          <td><%= board.title %></td>
-          <td><%= board.user.name %></td>
-          <td><%= board.created_at.to_s(:datetime_jp) %></td>
-          <td><%= board.updated_at.to_s(:datetime_jp) %></td>
-          <td><%= link_to '詳細', board, class: 'btn btn-outline-dark' %></td>
-          <% if current_user.admin? == true %>
-            <td><%= link_to '削除', board, class: 'btn btn-outline-dark', method: :delete %></td>
-          <% end %>  
-        </tr>
+      <tr>
+        <td><%= board.id %></td>
+        <td><%= board.title %></td>
+        <td><%= board.user.name %></td>
+        <td><%= board.created_at.to_s(:datetime_jp) %></td>
+        <td><%= board.updated_at.to_s(:datetime_jp) %></td>
+        <td><%= link_to '詳細', board, class: 'btn btn-outline-dark' %></td>
+        <% if current_user.admin? == true %>
+          <td><%= link_to '削除', board, class: 'btn btn-outline-dark', method: :delete %></td>
+        <% end %>  
+      </tr>
     <% end %>
   </tbody>
 </table>

@@ -25,7 +25,7 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.build(:user)).to be_valid
   end
 
-  it "is valid with a first name, last name and email, and password" do
+  it "is valid with a first name,and email, and password" do
     user = User.new(
       name: "Aaron",
       email:      "tester@example.com",

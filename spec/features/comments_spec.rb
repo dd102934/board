@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature "Comments", type: :feature do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user,admin: true) }
   
-  scenario "user creates a new comment" do
+  scenario "A user creates a new comment" do
     board = FactoryBot.create(:board)
   
     
@@ -23,21 +23,17 @@ RSpec.feature "Comments", type: :feature do
     }.to change(board.comments, :count).by(1)
   end
   
-  #scenario "admin_user delete a comment" do
-    #user = FactoryBot.create(:user)
-    #board = FactoryBot.create(:board)
+  scenario "admin_user delete a comment" do
+    board = FactoryBot.create(:board)
     
-    #sign_in_as user
-    #visit boards_path
+    sign_in_as user
+    visit boards_path
     
-    #click_link "詳細"
-    #fill_in "comment[comment]", with: "Test Comment"
-    #click_button "送信"
+    click_link "詳細"
+    fill_in "comment[comment]", with: "Test Comment"
+    click_button "送信"
     
-    #click_on "削除", match: :first
-    #expect {
-      #page.accept_confirm "削除してよろしいですか？"
-      #expect(page).to have_content "コメントが削除されました"
-    #}.to change { board.comments.count }.by(-1)
-  #end
+    click_on "削除", match: :first
+    expect(page).to have_content "コメントが削除されました"
+  end
 end
